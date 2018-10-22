@@ -12,14 +12,14 @@ class Page {
 		"data"=>[]//dados/variaveis que serão passadas pelo template
 	];
 
-	public function __construct($opts = array())
+	public function __construct($opts = array(), $tpl_dir = "/views/")
 	{
 		//
 		$this->options = array_merge($this->defaults, $opts);
 
 		$config = array(
 			//procurar as pastas a partir da pasta raiz no servidor com $_SERVER["DOCUMENT_ROOT"]  
-			"tpl_dir"       => $_SERVER["DOCUMENT_ROOT"]."/views/", //pega os arquivos html
+			"tpl_dir"       => $_SERVER["DOCUMENT_ROOT"].$tpl_dir, //pega os arquivos html
 			"cache_dir"     => $_SERVER["DOCUMENT_ROOT"]."/views-cache/",
 			"debug"         => false 
 		);
