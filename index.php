@@ -2,20 +2,22 @@
 
 	require_once("vendor/autoload.php");
 
-	$app = new \Slim\Slim();
+	use \Slim\Slim;
+	use \Hcode\Page;
+
+	$app = new Slim();
 
 	$app->config('debug', true);
 
+	//define a rota que esta sendo chamado
 	$app->get('/', function() {
 	    
-		$sql = new Hcode\DB\Sql();
+		$page = new Page();//carrega a pagina
 
-		$results = $sql->select("SELECT * FROM tb_users"); 
-
-		echo json_encode($results);
+		$page->setTpl("index");//mostra o conteudo
 
 	});
 
-	$app->run();
+	$app->run();//motor para tudo funcionar
 
 ?>
