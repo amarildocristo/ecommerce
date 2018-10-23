@@ -9,12 +9,16 @@ class Page {
 	private $tpl;
 	private $options = [];
 	private $defaults = [
+		//padronizando header e o footer nas paginas
+		"header"=>true,
+		"footer"=>true,
 		"data"=>[]//dados/variaveis que serão passadas pelo template
 	];
 
+	//Aqui quando receber as opções será setado como false 
 	public function __construct($opts = array(), $tpl_dir = "/views/")
 	{
-		//
+		//Aqui fará o marge e prevalecer o que esta sendo mandado, atribuindo o false no defaults acima
 		$this->options = array_merge($this->defaults, $opts);
 
 		$config = array(
@@ -30,8 +34,8 @@ class Page {
 	    
 	    $this->setData($this->options["data"]);
 
-	    $this->tpl->draw("header");
-
+	    //validando e carregando caso seja chamado o header, já que o padrão receberá false 
+	    if($this->options["header"] === true) $this->tpl->draw("header");
 	}
 
 	//pega os dados que serão enviados 
@@ -55,11 +59,9 @@ class Page {
 
 	public function __destruct()
 	{
-
-		$this->tpl->draw("footer");	
-
+		 //validando e carregando caso seja chamado o footer, já que o padrão receberá false 
+		if($this->options["footer"] === true) $this->tpl->draw("footer");	
 	}
-
 
 }
 
