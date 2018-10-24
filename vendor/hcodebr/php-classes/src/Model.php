@@ -2,10 +2,14 @@
 
 	namespace Hcode;
 
+	//
 	class Model {
 
+		//$values terá todos os dados/valores dos campos que tem dentro dos objetos.
+		//No caso do objeto usuario seus dados como: id, login, senha.  
 		private $values = [];
 
+		//Metodo magico que alimentará os getters e setters
 		public function __call($name, $args)
 		{
 			//tres primeiros numeros do metodo do nome que foi chamado
@@ -25,6 +29,7 @@
 			}
 		}
 
+		//recebe todos os dados que vem do banco
 		public function setData($data = array())
 		{
 			foreach ($data as $key => $value) {
