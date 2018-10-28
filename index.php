@@ -158,10 +158,42 @@
 
 		$user->update();
 
-		header("LOcation: /admin/users");
+		header("Location: /admin/users");
 		exit();
 
 	});
+
+	//rota esqueci a senha
+	$app->get("/admin/forgot", function(){
+
+		$page = new PageAdmin([
+			"header"=>false,
+			"footer"=>false
+		]);
+
+		$page->setTpl("forgot");	
+
+	});
+
+	$app->post("/admin/forgot", function(){
+		
+		//pegando o email via post
+		$user = User::getForgot($_POST["email"]);
+
+		header("Location: /admin/forgot/sent");
+		exit();
+	});
+
+	$app->get("/admin/forgot/sent", function(){
+
+		$page = new PageAdmin([
+			"header"=>false,
+			"footer"=>false
+		]);
+
+		$page->setTpl("forgot-sent");	
+
+	}); 
 
 	$app->run();//motor para tudo funcionar
 
